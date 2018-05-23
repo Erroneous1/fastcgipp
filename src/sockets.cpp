@@ -527,7 +527,7 @@ Fastcgipp::Socket Fastcgipp::SocketGroup::poll(bool block)
 
             if(m_listeners.find(socketId) != m_listeners.end())
             {
-                if(events == pollIn)
+                if(events == static_cast<decltype(events)>(pollIn))
                 {
                     createSocket(socketId);
                     continue;
@@ -542,7 +542,7 @@ Fastcgipp::Socket Fastcgipp::SocketGroup::poll(bool block)
             }
             else if(socketId == m_wakeSockets[1])
             {
-                if(events == pollIn)
+                if(events == static_cast<decltype(events)>(pollIn))
                 {
                     std::lock_guard<std::mutex> lock(m_wakingMutex);
                     char x[256];
